@@ -33,13 +33,47 @@ function orderAlphabetically(movieList) {
 
 // Iteration 4: All rates average - Get the average of all rates with 2 decimals
 
-function ratesAverage(movieList){
+function ratesAverage(movieList) {
+    if (movieList.length === 0) {
+        return 0;
+    }
+
     let movieRates = movieList.map(movie => movie.rate);
-    return movieRates.reduce(a, b => a += b) / movieRates.length;
+    let checkedMovieRates = movieRates.filter(movie => movie !== undefined);
+    const totalReviews = checkedMovieRates.reduce((sum, elem) => {
+        return sum += elem;
+    }, 0);
+
+    return Math.round((totalReviews / checkedMovieRates.length) * 100) / 100;
+
+    //Returns average when some movies do not have rate but still not checked
+
 }
 
 // Iteration 5: Drama movies - Get the average of Drama Movies
 
+function dramaMoviesRate(movieList) {
+    if (movieList.length === 0) return 0;
+
+    let dramaMovies = movieList.filter(movie => movie.genre.includes('Drama'));
+    if (dramaMovies.length === 0) return 0;
+
+    let movieRates = dramaMovies.map(movie => movie.rate);
+    let checkedMovieRates = movieRates.filter(movie => movie !== undefined);
+    const totalReviews = checkedMovieRates.reduce((sum, elem) => {
+        return sum += elem;
+    }, 0);
+
+    return Math.round((totalReviews / checkedMovieRates.length) * 100) / 100;
+}
+
 // Iteration 6: Time Format - Turn duration of the movies from hours to minutes
+
+function turnHoursToMinutes(movieList) {
+    movieList.forEach(movie => {
+      let time = movie.duration.split(' ');
+      console.log(time);
+    });
+}
 
 // BONUS Iteration: Best yearly rate average - Best yearly rate average
